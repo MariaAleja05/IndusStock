@@ -71,4 +71,10 @@ In the main file: MainIndusStock .... # Poner aqui la explicación de lo que hac
 
 ## How to install and use the program
 
-      # Escribir aqui como se instala el programa
+      # Escribir aqui como se instala el programa, OJO: INCLUIR LO DEL ENTORNO VIRTUAL EJEMPLO SEGÚN IA: 
+      PASO A PASO
+      - Crea el entorno virtual con `python -m venv venv`.
+      - Actívalo con `venv\Scripts\activate` o `source venv/bin/activate` según tu sistema operativo.
+      - Instala las dependencias con `pip install -r requirements.txt`.
+      - Incluye estas instrucciones en tu `README.md`.
+      De esta forma, tendrás un entorno virtual controlado, y cualquier persona que use tu código podrá replicar tu entorno sin problemas.
