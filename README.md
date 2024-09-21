@@ -4,8 +4,6 @@
 
 **By Photocopier $MA^3$
 
-![Logo](loguito.png)
-
 ## Planning
  
 
