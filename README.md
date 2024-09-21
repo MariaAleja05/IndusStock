@@ -70,3 +70,5 @@ In the main file: MainIndusStock .... # Poner aqui la explicación de lo que hac
 ```
 
 ## How to install and use the program
+
+      # Escribir aqui como se instala el programa
