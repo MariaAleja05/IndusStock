@@ -48,25 +48,25 @@ IndusStock/
 Where the DataBaseBuild module contains the following code, responsible for creating the database..... # Poner aqui la explicación de lo que hace esta primera clase del modulo
 
 ```python
-#Aqui codigo primer modulo
+# Aqui codigo primer modulo
 ```
 
 On the other hand, the DataValidator module contains the following code, responsible for validating..... # Poner aqui la explicación de lo que hace esta segunda clase del modulo
 
 ```python
-#Aqui codigo segundo modulo
+# Aqui codigo segundo modulo
 ```
 
 The last module: MainWindow, contains the following code, responsible for creating..... # Poner aqui la explicación de lo que hace esta tercera clase del modulo
 
 ```python
-#Aqui codigo tercer modulo
+# Aqui codigo tercer modulo
 ```
 
 In the main file: MainIndusStock .... # Poner aqui la explicación de lo que hace el archivo principal
 
 ```python
-#Aqui codigo archivo principal
+# Aqui codigo archivo principal
 ```
 
 ## How to install and use the program
