@@ -57,11 +57,6 @@ IndusStock/
 │   └── MainWindow.py
 └── MainIndusStock.py
 ```
-The following diagram reflects how the code is structured, and illustrates the relationships between the different modules of the project as follows:
-      - MainIndusStock is the main file that launches the application and interacts with the MainWindow class.
-      - MainWindow creates the GUI, validates data using DataValidator, and manages database operations through DataBaseBuild.
-      - DataValidator contains validation methods, such as validateFields() and validateNIT().
-      - DataBaseBuild includes methods for handling the database, like connect() and createTables().
 
 ```mermaid
 classDiagram
@@ -92,6 +87,13 @@ classDiagram
     MainWindow --> DataBaseBuild : uses
     DataBaseBuild <.. MainIndusStock : calls
 ```
+This following diagram reflects how the code is structured, and illustrates the relationships between the different modules of the project as follows:
+
+   - MainIndusStock is the main file that launches the application and interacts with the MainWindow class.
+   - MainWindow creates the GUI, validates data using DataValidator, and manages database operations through DataBaseBuild.
+   - DataValidator contains validation methods, such as validateFields() and validateNIT().
+   - DataBaseBuild includes methods for handling the database, like connect() and createTables().
+
 
 ### DataBaseBuild
 
