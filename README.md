@@ -42,7 +42,7 @@ classDiagram
     Proveedores <|-- Productos: has
 ```
 
-      # Explicar Diagrama base de datos general y la relacion entre las 2 tablas de proveedores y producto
+(Explicar Diagrama base de datos general y la relacion entre las 2 tablas de proveedores y producto)
  
 # Development
 
