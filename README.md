@@ -7,6 +7,48 @@
 
 The inventory management system solution for a warehouse in Python was approached using a modular and object-oriented approach, meeting the conditions set forth:
 
+- Decisions made:
+
+Use of classes: The code was structured in a way that it was not too extensive and sought to apply Object Oriented Programming, in order to model the system (products, inventory, records), in addition to structuring the code for the graphical interface and a SQL database. This facilitated the structure and organization of the code, with each class encapsulating the relevant functionality.
+
+User interface: It was decided to implement the use of the graphical user interface (GUI), by means of Tkinter, since it is included in Python, facilitating the creation of the GUI and improving the interaction with the user by establishing an inventory management very similar to the way it works in many companies.
+
+Data loading and management: The decision was made to use files for data persistence, with methods for massive record loading and report generation.
+
+- Code structure and basic operations:
+  
+A central class was built to manage the products in the warehouse. This class handles the necessary attributes, such as name, quantity and price, and allows the basic operations of adding, updating, removing and consulting products. The interaction with the system can be done through the console or, optionally, a GUI created with Tkinter to improve usability.
+
+Classes and objects: each product is created as an object with multiple attributes (name, quantity, price, etc.). We made sure that the methods to register inputs and outputs are well implemented to update the inventory in real time.
+
+Inventory listings: A method is included to obtain the current status of the inventory, showing the stored products, their quantities, prices and other relevant attributes.
+
+Bulk loading of records: A method was implemented that allows the loading of multiple products from one file (CSV or similar). This is useful when handling a large volume of data, and was designed to integrate well with the graphical interface.
+
+Data persistence: To ensure that the inventory is maintained between sessions, the data is stored in a SQLite database. This allows any changes to the inventory to be permanently recorded.
+
+
+- Backend Structure (Inventory Logic)
+
+This part includes the management of inventory data, mainly through SQLite database operations. CRUD operations (create, read, update, delete) are defined here and product persistence is handled.
+
+All the logic related to inventory management is encapsulated here. It allows adding products, removing them, updating them and consulting the inventory based on date filters, categories or any other relevant attribute. It is connected to a SQLite database that stores all records, ensuring data persistence.
+
+All of this is handled directly with SQLite using SQL queries, which ensures that the data is stored in the database file for future sessions.
+
+- Frontend (Graphical Interface with Tkinter)
+
+This is the part that interacts with the user. The interface is built using the MainWindow class, which organizes the different visual components of the application, such as buttons, input fields and labels.
+
+MainWindow class:
+This is the main window where the user can view and manage the inventory. This class is connected to the InventoryManager, so every time the user interacts with the interface (for example, adding a product), the backend methods are called. Data entry, action buttons, error handling and validations, updates and more are handled here.
+
+- Workflow
+  
+When the user interacts with the interface (e.g. by pressing a button to add a product), the interface takes the entered data, validates it and then calls the corresponding backend method. The result of that operation is reflected in the interface, updating the inventory status or displaying the results of a query.
+
+This design clearly separates the application logic and the visual presentation, making the code modular and easy to maintain.
+
 ### 2. Diagrams
 
    a. Class diagrams
@@ -42,7 +84,13 @@ classDiagram
     Proveedores <|-- Productos: has
 ```
 
-(Explicar Diagrama base de datos general y la relacion entre las 2 tablas de proveedores y producto)
+The database diagram presents two tables: Suppliers and Products, connected through the IdNit field.
+
+The Suppliers table contains essential information such as Name, PurchaseDate and RecordDate. This unique identifier allows each supplier to be linked to the products it supplies.
+
+The Products table, on the other hand, records details such as Code, Name, Measurement, Quantity, Price, ExpirationDate and RecordDate. Here, the IdNit field functions as a foreign key, associating each product with its corresponding supplier.
+
+The relationship between Suppliers and Products is of the “one-to-many” type, which means that a supplier can have several products associated with it. This is indicated in the diagram by an arrow connecting both tables through the IdNit field. This structure ensures that, for each registered supplier, multiple products can be managed and tracked in the database, allowing efficient inventory control and better traceability of supplies.
  
 # Development
 
@@ -120,7 +168,13 @@ In summary this module encapsulates all the logic related to creating, updating,
 
 ### DataValidator
 
-On the other hand, the DataValidator module contains the following code, responsible for validating..... # Poner aqui la explicación de lo que hace esta segunda clase del modulo
+On the other hand DataValidator class is responsible for validating various types of data entered into the system, ensuring their compliance with the established rules. Its main methods include no_spaces, which verifies that a text does not contain spaces.  In addition, it has methods such as is_float and is_integer, which determine whether a text can be converted to a decimal or integer number, respectively.
+
+The DataValidator class is used to ensure that the data entered into the inventory management system is valid and complies with certain formatting and content rules. Its main function is to prevent errors and guarantee the integrity of the information.
+
+Also, the class includes a method called is_valid_date, which validates the date format (dd/mm/yyyy) and checks if it is a valid date. There is also a method to check if a size is a valid number, called is_valid_size.
+
+On the other hand, the class presents specific validation methods, such as validate_id_nit, validate_supplier_name and validate_purchase_date, among others. These methods apply the general validation functions to check specific supplier and product data, providing clear error messages when the validation is not fulfilled.
 
 ```python
 # Aqui codigo segundo modulo
