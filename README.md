@@ -1,6 +1,6 @@
 # $MA^3$ IndusStock
 
-***"An undertaking of both obstacles and achievements, bringing forth essential lessons"***
+**"An undertaking of both obstacles and achievements, bringing forth essential lessons"**
 
 # Planning
 ### 1. How was the problem addressed?
