@@ -99,18 +99,18 @@ This following diagram reflects how the code is structured, and illustrates the 
 
 The DataBaseBuild module contains the following code, responsible for managing the database in the app. Its primary purpose is to set up and handle an SQLite database that stores all the information about suppliers and products. This module is essential because it handles the structure and operations of the database, which are fundamental to the functionality of your inventory application. Here's a brief explanation of its methods: 
 
-a. **__init__():** Initializes the class and creates the database if it doesn't exist. This ensures that the database is always available when the application starts, allowing you to store information.
+   - **__init__():** Initializes the class and creates the database if it doesn't exist. This ensures that the database is always available when the application starts, allowing you to store information.
 
-b. **database_build():** This function creates the Proveedores and Productos tables if they do not exist in the database. It is essential for structuring the database and enabling proper data insertion and retrieval. The tables are defined with fields such as IdNit, Nombre, Codigo, Cantidad, Precio, etc., which help organize the information in a clear and structured way.
+   - **database_build():** This function creates the Proveedores and Productos tables if they do not exist in the database. It is essential for structuring the database and enabling proper data insertion and retrieval. The tables are defined with fields such as IdNit, Nombre, Codigo, Cantidad, Precio, etc., which help organize the information in a clear and structured way.
 
-c. **run_query(query, parameters=()):** Executes generic SQL queries in the database, such as SELECT, INSERT, UPDATE, and DELETE.
+   - **run_query(query, parameters=()):** Executes generic SQL queries in the database, such as SELECT, INSERT, UPDATE, and DELETE.
 This function is important because it centralizes the execution of SQL queries, making code reusable and database handling efficient.
 
-d. **Supplier Operations:** Methods like *insert_proveedor()*, *get_proveedores()*, *update_proveedor()*, *delete_proveedor()*, and *search_proveedor()* manage supplier information: Insert new suppliers, retrieve all suppliers or a specific one, update supplier details, delete suppliers from the database.
+   - **Supplier Operations:** Methods like *insert_proveedor()*, *get_proveedores()*, *update_proveedor()*, *delete_proveedor()*, and *search_proveedor()* manage supplier information: Insert new suppliers, retrieve all suppliers or a specific one, update supplier details, delete suppliers from the database.
 
-e. **Product Operations:** Methods like *insert_producto()*, *get_productos()*, *update_producto()*, *delete_producto()*, and *search_producto()* manage products similarly to suppliers. Additional functions like *get_productos_by_proveedor()* and *get_productos_by_proveedor_nombre()* allow retrieving products associated with a supplier, either by their IdNit or their name.
+   - **Product Operations:** Methods like *insert_producto()*, *get_productos()*, *update_producto()*, *delete_producto()*, and *search_producto()* manage products similarly to suppliers. Additional functions like *get_productos_by_proveedor()* and *get_productos_by_proveedor_nombre()* allow retrieving products associated with a supplier, either by their IdNit or their name.
 
-f. **modifica_cantidad():** Updates the quantity of a specific product. This is crucial for keeping the product inventory up to date.
+   - **modifica_cantidad():** Updates the quantity of a specific product. This is crucial for keeping the product inventory up to date.
 
 In summary this module encapsulates all the logic related to creating, updating, querying, and deleting data in the database. This ensures that interactions with the database are structured and easy to maintain. By centralizing query execution in the run_query() function, you can reuse the same code to execute multiple types of queries, improving efficiency and reducing code duplication. With validations like foreign key relationships (e.g., FOREIGN KEY(IdNit) in the Productos table), the relationship between suppliers and products is properly structured, ensuring that products are not inserted for nonexistent suppliers.
 
