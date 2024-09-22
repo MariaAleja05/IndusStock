@@ -19,14 +19,29 @@
    b. Database diagram
 
 ```mermaid
+classDiagram
+    class Proveedores {
+        +IdNit: TEXT
+        +Nombre: TEXT
+        +FechaCompra: TEXT
+        +FechaRegistro: TEXT
+    }
 
+    class Productos {
+        +IdNit: TEXT
+        +Proveedor: TEXT
+        +Codigo: TEXT
+        +Nombre: TEXT
+        +Medida: INTEGER
+        +Cantidad: INTEGER
+        +Precio: REAL
+        +FechaVencimiento: TEXT
+        +FechaRegistro: TEXT
+    }
+
+    Proveedores <|-- Productos: has
 ```
-      # Diagrama base de datos general
-
-```mermaid
-
-```
-      # Diagrama relacion entre las 2 tablas de proveedores y producto
+      # Explicar Diagrama base de datos general y la relacion entre las 2 tablas de proveedores y producto
  
 # Development
 
