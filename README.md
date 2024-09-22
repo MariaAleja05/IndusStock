@@ -57,6 +57,10 @@ IndusStock/
 │   └── MainWindow.py
 └── MainIndusStock.py
 ```
+The following diagram reflects how the code is structured, and illustrates the relationships between the different modules of the project as follows:
+      - MainWindow creates the GUI, validates data using DataValidator, and manages database operations through DataBaseBuild.
+      - DataValidator contains validation methods, such as validateFields() and validateNIT().
+      - DataBaseBuild includes methods for handling the database, like connect() and createTables().
 
 ```mermaid
 classDiagram
