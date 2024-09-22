@@ -130,10 +130,18 @@ The last module: MainWindow, contains the following code, responsible for creati
 
 ### MainIndusStock
 
-In the main file: MainIndusStock .... # Poner aqui la explicación de lo que hace el archivo principal
+In the main file: MainIndusStock serves as the entry point of the inventory management application. It initializes the GUI and manages the main event loop, allowing users to interact with the application.
 
 ```python
-# Aqui codigo archivo principal
+# MainIndusStock.py
+
+from tkinter import Tk
+from paquete_codigo.MainWindow import MainWindow
+
+if __name__ == "__main__":
+    root = Tk()
+    app = MainWindow(root)
+    root.mainloop()
 ```
 
 # How to install and use the program
