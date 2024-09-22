@@ -5,7 +5,7 @@
 # Planning
 ### 1. How was the problem addressed?
 
-      # Escribir aqui como se abordo el problema
+(Escribir aqui como se abordo el problema)
 
 ### 2. Diagrams
 
@@ -14,7 +14,7 @@
 ```mermaid
 
 ```
-      # Diagrama de las clases codigo
+(Diagrama de las clases codigo)
 
    b. Database diagram
 
@@ -58,6 +58,7 @@ IndusStock/
 └── MainIndusStock.py
 ```
 The following diagram reflects how the code is structured, and illustrates the relationships between the different modules of the project as follows:
+      - MainIndusStock is the main file that launches the application and interacts with the MainWindow class.
       - MainWindow creates the GUI, validates data using DataValidator, and manages database operations through DataBaseBuild.
       - DataValidator contains validation methods, such as validateFields() and validateNIT().
       - DataBaseBuild includes methods for handling the database, like connect() and createTables().
