@@ -43,9 +43,34 @@ IndusStock/
 ```
 
 ```mermaid
+classDiagram
+    class MainIndusStock {
+        +runApp()
+    }
+    
+    class MainWindow {
+        +initComponents()
+        +createGUI()
+        -db Database
+        -validator DataValidator
+    }
 
+    class DataValidator {
+        +validateFields()
+        +validateNIT()
+    }
+
+    class DataBaseBuild {
+        +connect()
+        +createTables()
+        +insertData()
+    }
+
+    MainIndusStock --> MainWindow : launches
+    MainWindow --> DataValidator : uses
+    MainWindow --> DataBaseBuild : uses
+    DataBaseBuild <.. MainIndusStock : calls
 ```
-      # Aquí poner diagrama de clases relacion entre los modulos del paquete
 
 ### DataBaseBuild
 
