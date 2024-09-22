@@ -5,7 +5,7 @@
 # Planning
 ### 1. How was the problem addressed?
 
-(Escribir aqui como se abordo el problema)
+The inventory management system solution for a warehouse in Python was approached using a modular and object-oriented approach, meeting the conditions set forth:
 
 ### 2. Diagrams
 
