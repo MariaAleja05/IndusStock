@@ -114,7 +114,6 @@ f. **modifica_cantidad():** Updates the quantity of a specific product. This is 
 
 In summary this module encapsulates all the logic related to creating, updating, querying, and deleting data in the database. This ensures that interactions with the database are structured and easy to maintain. By centralizing query execution in the run_query() function, you can reuse the same code to execute multiple types of queries, improving efficiency and reducing code duplication. With validations like foreign key relationships (e.g., FOREIGN KEY(IdNit) in the Productos table), the relationship between suppliers and products is properly structured, ensuring that products are not inserted for nonexistent suppliers.
 
-
 ```python
 # Aqui codigo primer modulo
 ```
