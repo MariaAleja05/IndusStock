@@ -54,9 +54,68 @@ This design clearly separates the application logic and the visual presentation,
    a. Class diagrams
 
 ```mermaid
+classDiagram
+    class MainIndusStock {
+        +__main__()
+        +import Tk
+        +import MainWindow from paquete_codigo
+    }
+
+    class MainWindow {
+        -root: Tk
+        +__init__(root)
+        +create_gui()
+        +validate_data()
+        +handle_database_operations()
+        +on_insert_proveedor()
+        +on_update_proveedor()
+        +on_delete_proveedor()
+        +on_search_proveedor()
+        +on_insert_producto()
+        +on_update_producto()
+        +on_delete_producto()
+        +on_search_producto()
+        +import DataValidator from paquete_codigo
+        +import DataBaseBuild from paquete_codigo
+    }
+
+    class DataValidator {
+        +validateFields()
+        +validateNIT()
+        +validateDate()
+        +validateNonEmpty()
+        +validatePositiveNumber()
+    }
+
+    class DataBaseBuild {
+        -db_name: str
+        +__init__()
+        +database_build()
+        +run_query(query, parameters)
+        +insert_proveedor(id_nit, nombre, fecha_compra, fecha_registro)
+        +get_proveedores()
+        +update_proveedor(id_nit, nombre, fecha_compra)
+        +delete_proveedor(id_nit)
+        +search_proveedor(id_nit)
+        +insert_producto(id_nit, proveedor, codigo, nombre, medida, cantidad, precio, fecha_vencimiento, fecha_registro)
+        +get_productos()
+        +update_producto(codigo, nombre, medida, cantidad, precio, fecha_vencimiento)
+        +delete_producto(codigo)
+        +search_producto(codigo)
+        +get_productos_by_proveedor(id_nit)
+        +get_productos_by_proveedor_nombre(nombre_proveedor)
+        +search_proveedor_por_nombre(nombre_proveedor)
+        +get_cantidad_by_id_nit(id_nit)
+        +get_productos_by_nit(id_nit)
+        +modifica_cantidad(codigo, nueva_cantidad)
+    }
+
+    MainIndusStock --> MainWindow : uses
+    MainWindow *-- DataValidator : composes
+    MainWindow *-- DataBaseBuild : composes
+    DataBaseBuild --> DataValidator : interacts
 
 ```
-(Diagrama de las clases codigo)
 
    b. Database diagram
 
