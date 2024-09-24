@@ -27,7 +27,6 @@ Bulk loading of records: A method was implemented that allows the loading of mul
 
 Data persistence: To ensure that the inventory is maintained between sessions, the data is stored in a SQLite database. This allows any changes to the inventory to be permanently recorded.
 
-
 - Backend Structure (Inventory Logic)
 
 This part includes the management of inventory data, mainly through SQLite database operations. CRUD operations (create, read, update, delete) are defined here and product persistence is handled.
