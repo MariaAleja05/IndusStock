@@ -53,6 +53,50 @@ This design clearly separates the application logic and the visual presentation,
    a. Class diagrams
 
 ```mermaid
+classDiagram
+    class MainWindow {
+        +__init__(window)
+        +search_products(window, start_date, end_date)
+        +get_productos()
+        +add_producto()
+        +update_producto()
+        +validate_all_fields()
+        +retirar_productos()
+        +delete_producto()
+        +on_double_click(event)
+        +clear_fields()
+    }
+
+    class DataValidator {
+        +is_valid_date(date)
+        +validate_id_nit(id_nit)
+        +validate_nombre_proveedor(nombre_proveedor)
+        +validate_codigo(codigo)
+        +validate_nombre_producto(nombre_producto)
+        +validate_medida(medida)
+        +validate_cantidad(cantidad)
+        +validate_precio(precio)
+        +validate_fecha_vencimiento(fecha_vencimiento)
+    }
+
+    class DataBase {
+        +db_name
+        +get_productos()
+        +insert_producto(id_nit, nombre_proveedor, codigo, nombre_producto, medida, cantidad, precio, fecha_vencimiento, fecha_registro)
+        +update_producto(codigo, nombre_producto, medida, cantidad, precio, fecha_vencimiento, fecha_registro)
+        +get_productos_by_nit(id_nit)
+        +modifica_cantidad(codigo, nueva_cantidad)
+        +registrar_retiro(codigo, cantidad)
+        +delete_producto(codigo)
+        +search_proveedor(id_nit)
+    }
+
+    MainWindow --> DataValidator : uses
+    MainWindow --> DataBase : uses
+
+    %% Relaciones de composición
+    MainWindow o-- DataValidator : compone
+    MainWindow o-- DataBase : compone
 
 ```
 
