@@ -104,11 +104,10 @@ classDiagram
 
 ```mermaid
 classDiagram
-    class Proveedores {
-        +IdNit: TEXT
-        +Nombre: TEXT
-        +FechaCompra: TEXT
-        +FechaRegistro: TEXT
+    class Modificaciones {
+        +Codigo_producto: TEXT NOT NULL
+        +Cantidad_retirada: INTEGER NOT NULL
+        +Fecha_retiro: DATE NOT NULL
     }
 
     class Productos {
