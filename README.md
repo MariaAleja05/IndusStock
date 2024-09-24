@@ -122,17 +122,15 @@ classDiagram
         +FechaRegistro: TEXT
     }
 
-    Proveedores <|-- Productos: has
+    Modificaciones <|-- Productos: has
 ```
 
-The database diagram presents two tables: Suppliers and Products, connected through the IdNit field.
+The Modifications table contains essential information such as the modified product code, the quantity withdrawn and the date of withdrawal. This identifier allows each modification to be linked to the product to which it corresponds.
 
-The Suppliers table contains essential information such as Name, PurchaseDate and RecordDate. This unique identifier allows each supplier to be linked to the products it supplies.
+On the other hand, the Products table records details such as code, name, measure, quantity, price, expiration date and registration date. Here, the Product_Code field acts as a foreign key that associates each modification with its corresponding product.
 
-The Products table, on the other hand, records details such as Code, Name, Measurement, Quantity, Price, ExpirationDate and RecordDate. Here, the IdNit field functions as a foreign key, associating each product with its corresponding supplier.
+The relationship between Products and Modifications is of the “one-to-many” type, meaning that a product can have several modifications associated with it. This is indicated in the diagram by an arrow connecting both tables through the Product_Code field. This structure allows to efficiently manage and track the modifications made to each product, improving inventory control and traceability of changes.
 
-The relationship between Suppliers and Products is of the “one-to-many” type, which means that a supplier can have several products associated with it. This is indicated in the diagram by an arrow connecting both tables through the IdNit field. This structure ensures that, for each registered supplier, multiple products can be managed and tracked in the database, allowing efficient inventory control and better traceability of supplies.
- 
 # Development
 
 The project code is structured in the form of a package as follows:
