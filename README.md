@@ -234,7 +234,22 @@ On the other hand, the class presents specific validation methods, such as valid
 
 ### MainWindow
 
-The last module: MainWindow, contains the following code, responsible for creating..... # Poner aqui la explicación de lo que hace esta tercera clase del modulo
+The last module: MainWindow, contains the following code, and is responsible for managing the graphical user interface (GUI) of the inventory management application. It integrates various functionalities for product management, including searching, adding, updating, and removing products, as well as displaying information in a structured manner through a Treeview widget. This module plays a critical role in ensuring that users can interact seamlessly with the underlying database and perform inventory operations efficiently.
+
+*Key Methods and Responsibilities:*
+
+  - **open_db_window():** This method creates a new window for interacting with the database. It includes fields for entering start and end dates to filter product records based on their registration date. The method also sets up a Treeview widget to display the results of the search, ensuring that the interface is user-friendly and informative.
+  - **search_products(window, start_date, end_date):** This method retrieves products from the database within a specified date range. It validates the date format and executes a SQL query to fetch records from the Productos table. Results are displayed in the Treeview, and appropriate error messages are shown if there are issues with the input.
+  - **get_productos():** This method populates the main Treeview with products retrieved from the database. It clears any existing entries to ensure that the displayed data is current, providing a clear overview of the inventory.
+  - **add_producto():** Responsible for adding a new product to the database, this method validates input fields before calling the database’s insertion method. It updates the displayed product list and clears input fields after a successful operation.
+  - **update_producto():** This method updates an existing product’s details in the database. It validates input fields and uses the database’s update function to modify records. Users receive confirmation of successful updates, enhancing user experience.
+  - **validate_all_fields():** This method consolidates validation logic for all input fields, ensuring that the data entered by the user adheres to the specified rules. It returns a boolean indicating whether all validations passed, thus guiding the flow of data entry.
+  - **retirar_productos():** This method handles product withdrawals by validating the ID NIT and quantity to withdraw. It checks the existing inventory levels before performing updates, ensuring that the stock data remains accurate and that users are informed of any discrepancies.
+  - **delete_producto():** This method allows users to remove a product from the inventory. It prompts for confirmation before executing the deletion, safeguarding against accidental removals. It also refreshes the product list afterward to reflect the latest state of the inventory.
+  - **on_double_click(event):** This method facilitates editing of product details when a user double-clicks an item in the Treeview. It populates the input fields with the selected product's information, making it easier for users to modify existing records.
+  - **clear_fields():** This utility method resets all input fields to their default state, improving usability by allowing users to start fresh after completing actions.
+
+In summary, the MainWindow module encapsulates the GUI logic for the inventory management application. It integrates various functionalities to search, add, update, and delete product records, while also ensuring a smooth user experience through validations and feedback mechanisms. By managing user interactions with the database, this module plays a crucial role in maintaining an accurate and user-friendly inventory management system.
 
 ```python
 # Aqui codigo tercer modulo
