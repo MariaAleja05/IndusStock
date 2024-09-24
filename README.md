@@ -54,66 +54,6 @@ This design clearly separates the application logic and the visual presentation,
    a. Class diagrams
 
 ```mermaid
-classDiagram
-    class MainIndusStock {
-        +__main__()
-        +import Tk
-        +import MainWindow from paquete_codigo
-    }
-
-    class MainWindow {
-        -root: Tk
-        +__init__(root)
-        +create_gui()
-        +validate_data()
-        +handle_database_operations()
-        +on_insert_proveedor()
-        +on_update_proveedor()
-        +on_delete_proveedor()
-        +on_search_proveedor()
-        +on_insert_producto()
-        +on_update_producto()
-        +on_delete_producto()
-        +on_search_producto()
-        +import DataValidator from paquete_codigo
-        +import DataBaseBuild from paquete_codigo
-    }
-
-    class DataValidator {
-        +validateFields()
-        +validateNIT()
-        +validateDate()
-        +validateNonEmpty()
-        +validatePositiveNumber()
-    }
-
-    class DataBaseBuild {
-        -db_name: str
-        +__init__()
-        +database_build()
-        +run_query(query, parameters)
-        +insert_proveedor(id_nit, nombre, fecha_compra, fecha_registro)
-        +get_proveedores()
-        +update_proveedor(id_nit, nombre, fecha_compra)
-        +delete_proveedor(id_nit)
-        +search_proveedor(id_nit)
-        +insert_producto(id_nit, proveedor, codigo, nombre, medida, cantidad, precio, fecha_vencimiento, fecha_registro)
-        +get_productos()
-        +update_producto(codigo, nombre, medida, cantidad, precio, fecha_vencimiento)
-        +delete_producto(codigo)
-        +search_producto(codigo)
-        +get_productos_by_proveedor(id_nit)
-        +get_productos_by_proveedor_nombre(nombre_proveedor)
-        +search_proveedor_por_nombre(nombre_proveedor)
-        +get_cantidad_by_id_nit(id_nit)
-        +get_productos_by_nit(id_nit)
-        +modifica_cantidad(codigo, nueva_cantidad)
-    }
-
-    MainIndusStock --> MainWindow : uses
-    MainWindow *-- DataValidator : composes
-    MainWindow *-- DataBaseBuild : composes
-    DataBaseBuild --> DataValidator : interacts
 
 ```
 
@@ -204,22 +144,33 @@ This following diagram reflects how the code is structured, and illustrates the 
 
 ### DataBaseBuild
 
-The DataBaseBuild module contains the following code, responsible for managing the database in the app. Its primary purpose is to set up and handle an SQLite database that stores all the information about suppliers and products. This module is essential because it handles the structure and operations of the database, which are fundamental to the functionality of your inventory application. Here's a brief explanation of its methods: 
+The DataBaseBuild module is responsible for managing the SQLite database that stores information about products and their modifications within the inventory management application. This module is essential for ensuring the integrity and structure of the database, as well as providing methods to interact with and manipulate data effectively.
 
-   - **__init__():** Initializes the class and creates the database if it doesn't exist. This ensures that the database is always available when the application starts, allowing you to store information.
+*Key Methods and Responsibilities:*
+  - **__init__():** The constructor initializes the class and ensures that the database file is created if it doesn't already exist. It calls database_build() to set up the database structure, ensuring that all necessary tables are available when the application starts.
 
-   - **database_build():** This function creates the Proveedores and Productos tables if they do not exist in the database. It is essential for structuring the database and enabling proper data insertion and retrieval. The tables are defined with fields such as IdNit, Nombre, Codigo, Cantidad, Precio, etc., which help organize the information in a clear and structured way.
+  - **database_build():** This method creates two important tables in the SQLite database:
+      * Modificaciones: Records details about product withdrawals, including the product code, the quantity withdrawn, and the date of withdrawal. It is linked to the Productos table via a foreign key (Codigo_producto), ensuring that the withdrawal is tied to an existing product.
+      * Productos: Stores information about each product, such as its code (primary key), name, unit of measure, quantity, price, expiration date, and registration date. This table is the core of the inventory, where all product-related data is managed.
 
-   - **run_query(query, parameters=()):** Executes generic SQL queries in the database, such as SELECT, INSERT, UPDATE, and DELETE.
-This function is important because it centralizes the execution of SQL queries, making code reusable and database handling efficient.
+  - **run_query(query, parameters=()):** A utility method that centralizes the execution of SQL queries. It takes a SQL query string and optional parameters, executes the query, and commits the changes if required. This method helps reduce code duplication and enhances the reusability of SQL operations.
 
-   - **Supplier Operations:** Methods like *insert_proveedor()*, *get_proveedores()*, *update_proveedor()*, *delete_proveedor()*, and *search_proveedor()* manage supplier information: Insert new suppliers, retrieve all suppliers or a specific one, update supplier details, delete suppliers from the database.
+  - **registrar_retiro(codigo_producto, cantidad_retirada):** This method registers a product withdrawal by inserting a record into the Modificaciones table. It records the product code, the quantity withdrawn, and the current date and time of the withdrawal, ensuring that the stock levels are updated accordingly.
 
-   - **Product Operations:** Methods like *insert_producto()*, *get_productos()*, *update_producto()*, *delete_producto()*, and *search_producto()* manage products similarly to suppliers. Additional functions like *get_productos_by_proveedor()* and *get_productos_by_proveedor_nombre()* allow retrieving products associated with a supplier, either by their IdNit or their name.
+  - **Foreign Key Relationship:** The Modificaciones table has a foreign key (Codigo_producto) that references the Codigo field in the Productos table. This relationship ensures that modifications are only made for existing products, maintaining data integrity.
 
-   - **modifica_cantidad():** Updates the quantity of a specific product. This is crucial for keeping the product inventory up to date.
+*Product Operations:*
 
-In summary this module encapsulates all the logic related to creating, updating, querying, and deleting data in the database. This ensures that interactions with the database are structured and easy to maintain. By centralizing query execution in the run_query() function, you can reuse the same code to execute multiple types of queries, improving efficiency and reducing code duplication. With validations like foreign key relationships (e.g., FOREIGN KEY(IdNit) in the Productos table), the relationship between suppliers and products is properly structured, ensuring that products are not inserted for nonexistent suppliers.
+These methods provide various CRUD (Create, Read, Update, Delete) functionalities for managing products in the inventory:
+
+  - **insert_producto():** Inserts a new product into the Productos table with details such as code, name, unit of measure, quantity, price, expiration date, and registration date.
+  - **get_productos():** Retrieves all products stored in the Productos table.
+  - **update_producto():** Updates the information of an existing product, such as its name, unit of measure, quantity, price, expiration date, and registration date.
+  - **delete_producto():** Deletes a product based on its code (Codigo).
+  - **search_producto():** Searches for a product by its code.
+  - **modifica_cantidad():** Updates the quantity of a product, ensuring accurate inventory levels.
+
+In summary, the DataBaseBuild module encapsulates all database-related logic. It provides methods for creating, updating, and retrieving product data, as well as registering stock withdrawals. By managing the tables for products and modifications, this module ensures that the inventory data is accurate and up to date, supporting the overall functionality of the inventory management system.
 
 ```python
 # Aqui codigo primer modulo
