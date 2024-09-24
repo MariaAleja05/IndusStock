@@ -149,8 +149,8 @@ The DataBaseBuild module is responsible for managing the SQLite database that st
   - **__init__():** The constructor initializes the class and ensures that the database file is created if it doesn't already exist. It calls database_build() to set up the database structure, ensuring that all necessary tables are available when the application starts.
 
   - **database_build():** This method creates two important tables in the SQLite database:
-      * Modificaciones: Records details about product withdrawals, including the product code, the quantity withdrawn, and the date of withdrawal. It is linked to the Productos table via a foreign key (Codigo_producto), ensuring that the withdrawal is tied to an existing product.
-      * Productos: Stores information about each product, such as its code (primary key), name, unit of measure, quantity, price, expiration date, and registration date. This table is the core of the inventory, where all product-related data is managed.
+      * **Modificaciones:** Records details about product withdrawals, including the product code, the quantity withdrawn, and the date of withdrawal. It is linked to the Productos table via a foreign key (Codigo_producto), ensuring that the withdrawal is tied to an existing product.
+      * **Productos:** Stores information about each product, such as its code (primary key), name, unit of measure, quantity, price, expiration date, and registration date. This table is the core of the inventory, where all product-related data is managed.
 
   - **run_query(query, parameters=()):** A utility method that centralizes the execution of SQL queries. It takes a SQL query string and optional parameters, executes the query, and commits the changes if required. This method helps reduce code duplication and enhances the reusability of SQL operations.
 
