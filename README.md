@@ -144,7 +144,7 @@ IndusStock/
 │       ├── DataBaseBuild.py
 │       ├── DataValidator.py
 │       └── MainWindow.py
-└── MainIndusStock.py
+|    └── MainIndusStock.py
 └── manejo-inventario.db
 ```
 
