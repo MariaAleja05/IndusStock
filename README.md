@@ -137,12 +137,14 @@ The project code is structured in the form of a package as follows:
 
 ```
 IndusStock/
-├── paquete_codigo/
-│   ├── __init__.py
-│   ├── DataBaseBuild.py
-│   ├── DataValidator.py
-│   └── MainWindow.py
+├── src/
+|   ├── paquete_codigo/
+│       ├── __init__.py
+│       ├── DataBaseBuild.py
+│       ├── DataValidator.py
+│       └── MainWindow.py
 └── MainIndusStock.py
+└── manejo-inventario.db
 ```
 
 ```mermaid
