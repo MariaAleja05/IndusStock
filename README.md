@@ -1127,7 +1127,7 @@ if __name__ == "__main__":
 
 # How to install and use the program
 
-  - Crea el entorno virtual con `python -m venv venv`.
+  - Crea el entorno virtual con `python -m venv venv`. O simplemente descarga la carpeta con el entorno ya creado.
   - Actívalo con `venv\Scripts\activate` o `source venv/bin/activate` según tu sistema operativo.
   - No debes instalar ninguna dependencia nueva 
   - De esta forma, tendrás un entorno virtual controlado, y cualquier persona que use tu este código podrá replicar nuestro entorno sin problemas.
