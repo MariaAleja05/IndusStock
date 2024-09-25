@@ -1144,3 +1144,11 @@ To make use of the inventory management application follow the steps below:
 
 *Option with virtual environment:*
 
+1. Download the attached zip file to the repo on your computer.
+
+2.  Unzip the zip file
+
+3.  Type in the terminal the next script to activate the virtual environment  Unzip the zip file
+
+4.  Then Type the next script to run the code .\InduStock\src\MainIndusStock.py
+
