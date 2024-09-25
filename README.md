@@ -643,16 +643,16 @@ class MainWindow:
         self.fecha_vencimiento.bind("<FocusIn>", lambda e: self.fecha_vencimiento.delete(0, tk.END))
         #self.fecha_vencimiento.bind("<FocusOut>", self.validate_fecha_vencimiento)
 
-    # Campo para la Fecha de Registro
+    # Fiel from date of registration
         tk.Label(frame, text="Fecha Registro (dd/mm/yyyy):").grid(row=9, column=0, pady=5, padx=5, sticky='e')
     
-    # Obtener la fecha actual en formato dd/mm/yyyy
+    # Get actual day in format dd/mm/yyyy
         fecha_hoy = datetime.now().strftime("%d/%m/%Y")
     
         self.fecha_registro = tk.Entry(frame)
         self.fecha_registro.grid(row=9, column=1, pady=5, padx=5)
     
-    # Insertar la fecha actual automáticamente
+    # Insert current date automatically
         self.fecha_registro.insert(0, fecha_hoy)
 
         ttk.Button(frame, text="Guardar Producto", command=self.add_producto).grid(row=10, column=0, pady=10, padx=5)
@@ -688,24 +688,24 @@ class MainWindow:
         self.tree.bind("<Double-1>", self.on_double_click)
     
     def mostrar_modificaciones(self):
-    # Crear una ventana nueva para mostrar las modificaciones
+    # Create a new window to display the modifications
         ventana_modificaciones = Toplevel()
         ventana_modificaciones.title("Historial de Modificaciones")
 
-    # Crear una tabla (treeview) para mostrar los datos
+    # Create a table (treeview) to display the data
         tree = ttk.Treeview(ventana_modificaciones, columns=("Codigo", "Cantidad", "Fecha"), show="headings")
         tree.heading("Codigo", text="Código Producto")
         tree.heading("Cantidad", text="Cantidad Retirada")
         tree.heading("Fecha", text="Fecha de Retiro")
 
-    # Conectarse a la base de datos y obtener los registros de la tabla Modificaciones
+    # Connect to the database and get the records of the Modifications table.
         with sqlite3.connect(self.db.db_name) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT Codigo_producto, Cantidad_retirada, Fecha_retiro FROM Modificaciones")
             for row in cursor.fetchall():
                 tree.insert("", "end", values=row)
 
-    # Mostrar la tabla
+    # Show the table
         tree.pack(fill=tk.BOTH, expand=True)
 
         def validate_id_nit(self, event):
@@ -783,19 +783,19 @@ class MainWindow:
     # Methods with the DataBase
     
     def open_db_window(self):
-    # Crear una nueva ventana
+    # Create a new window  
         new_window = Toplevel(self.wind)
         new_window.title("Base de Datos")
         new_window.geometry("800x700")
 
-    # Asignar un manejador de eventos para que el Treeview sea destruido correctamente al cerrar la ventana
+    # Assign an event handler so that the Treeview is correctly destroyed when the window is closed
         def on_close():
-        # Destruye la ventana secundaria y limpia los widgets asociados
+        # Destroy the sub-window and clean the associated widgets
             new_window.destroy()
 
-        new_window.protocol("WM_DELETE_WINDOW", on_close)  # Configurar el cierre correcto de la ventana
+        new_window.protocol("WM_DELETE_WINDOW", on_close)  # Configure the correct closing of the window
 
-    # Etiquetas y campos de entrada para las fechas
+    # Labels and input fields for dates
         tk.Label(new_window, text="Fecha Inicio (DD-MM-YYYY):").pack(pady=5)                                  
         start_date_entry = tk.Entry(new_window)
         start_date_entry.pack(pady=5)
@@ -808,10 +808,10 @@ class MainWindow:
                                 command=lambda: self.search_products(new_window, start_date_entry.get(), end_date_entry.get()))
         search_button.pack(pady=10)
 
-    # Tabla para mostrar resultados
+    # Table to show results
         self.tree_db_window = ttk.Treeview(new_window, columns=("ID NIT", "Proveedor", "Medida gr/l", "Cantidad", "Precio", "F/Vencimiento", "F/Registro"), show='headings')
 
-    # Definir encabezados y anchos de columnas
+    # Define column headers and widths
         self.tree_db_window.heading("ID NIT", text="ID NIT")
         self.tree_db_window.heading("Proveedor", text="Proveedor")
         self.tree_db_window.heading("Medida gr/l", text="Medida gr/l")
@@ -820,7 +820,7 @@ class MainWindow:
         self.tree_db_window.heading("F/Vencimiento", text="F/Vencimiento")
         self.tree_db_window.heading("F/Registro", text="F/Registro")
 
-    # Establecer anchos de columnas
+    # Set column widths
         self.tree_db_window.column("ID NIT", width=100)
         self.tree_db_window.column("Proveedor", width=150)
         self.tree_db_window.column("Medida gr/l", width=100)
@@ -834,17 +834,17 @@ class MainWindow:
     def search_products(self, window, start_date, end_date):
         validator = DataValidator()
 
-    # Verificar que las fechas tengan el formato correcto usando la función is_valid_date
+    # Verify that dates have the correct format using the is_valid_date function.
         if not validator.is_valid_date(start_date) or not validator.is_valid_date(end_date):
             mssg.showerror("Error", "Por favor ingresa las fechas en formato DD/MM/YYYY.")
             return
 
         try:
-        # Convertir las fechas al formato adecuado
+        # Convert dates to the appropriate format
             start_date_obj = datetime.strptime(start_date, '%d/%m/%Y')
             end_date_obj = datetime.strptime(end_date, '%d/%m/%Y')
 
-        # Conectar a la base de datos y ejecutar la consulta
+        # Connect to the database and run the query
             conn = sqlite3.connect(self.db.db_name)
             cursor = conn.cursor()
 
@@ -857,11 +857,11 @@ class MainWindow:
             productos = cursor.fetchall()
             conn.close()
 
-        # Limpiar la tabla antes de insertar nuevos resultados
+        # Clear the table before inserting new results
             for row in self.tree_db_window.get_children():
                 self.tree_db_window.delete(row)
 
-        # Insertar los productos en el Treeview si están dentro del rango de fechas
+        # Insert the products in the Treeview if they are within the date range
             for producto in productos:
                 self.tree_db_window.insert("", "end", values=producto)
 
@@ -871,26 +871,26 @@ class MainWindow:
             mssg.showerror("Error", "Las fechas no tienen el formato correcto.")
 
     def get_productos(self):
-        # Limpiar la tabla antes de actualizarla
-        records = self.tree.get_children()  # Obtener todos los registros actuales del treeview
+        # Clear the table before the update
+        records = self.tree.get_children()  # Get all current treeview records
         for element in records:
-            self.tree.delete(element)  # Eliminar cada registro
+            self.tree.delete(element)  # Delete each record
 
-        # Obtener productos desde la base de datos
-        productos = self.db.get_productos()  # Consulta a la base de datos
-        productos = productos.fetchall()  # Asegurarse de obtener todos los registros como una lista
+        # Get products from the database
+        productos = self.db.get_productos()  # Database query
+        productos = productos.fetchall()  # Make sure to obtain all records as a list.
 
-        if productos:  # Si hay productos en la base de datos
+        if productos:  # If there are products in the database
             for row in productos:
-                # Insertar los productos en la tabla de la interfaz gráfica (treeview)
+                # Insert products in the graphical interface table (treeview)
                 self.tree.insert('', tk.END, values=row)
         else:
-            print("No hay productos para mostrar.")  # Para depuración en caso de que no haya productos
+            print("No hay productos para mostrar.")  # For depuration in case of no products
     
     def add_producto(self):
-    # Validar todos los campos aquí, no en FocusOut
+    # Validate all fields here, not in FocusOut
         if not self.validate_all_fields():
-            return  # Si algo no pasa la validación, detener la ejecución
+            return  # If something does not pass validation, stop execution
     
         try:
             self.db.insert_producto(
@@ -912,7 +912,7 @@ class MainWindow:
 
     def update_producto(self):
         if not self.validate_all_fields():
-            return  # Si algo no pasa la validación, detener la ejecución
+            return  # If something does not pass validation, stop execution
     
         try:
             self.db.update_producto(
@@ -932,7 +932,7 @@ class MainWindow:
             mssg.showerror("Error", "La cantidad debe ser un número entero y el precio debe ser un número decimal.")
     
     def validate_all_fields(self):
-    # Llamar a todas las funciones de validación y mostrar errores
+    # Call all validation functions and display errors
         if self.validator.validate_id_nit(self.id_nit.get()):
             mssg.showerror("Error", self.validator.validate_id_nit(self.id_nit.get()))
             return False
@@ -965,76 +965,76 @@ class MainWindow:
             mssg.showerror("Error", self.validator.validate_fecha_vencimiento(self.fecha_vencimiento.get()))
             return False
 
-        return True  # Si todo pasa la validación
+        return True  # If everything passes validation
     
     def retirar_productos(self):
         id_nit = self.id_nit.get()
-        cantidad_retirar = self.cantidad.get()  # Usar self.cantidad para obtener la cantidad
+        cantidad_retirar = self.cantidad.get()  # Use self.cantidad to obtain quantity
 
         if self.validate_id_nit(None) and self.validate_cantidad(None):
-        # Buscar productos asociados al ID NIT
+        # Search for products associated with the NIT ID
             productos = self.db.get_productos_by_nit(id_nit)
 
             if productos:
                 for producto in productos:
-                    current_cantidad = producto[5]  # Cantidad actual del producto (producto[5] es la cantidad)
+                    current_cantidad = producto[5]  # Current product quantity (product[5] is the quantity)
                     try:
                         nueva_cantidad = int(cantidad_retirar)
                         if nueva_cantidad <= current_cantidad:
-                        # Actualizar la cantidad en la base de datos usando la nueva función
+                        # Update the quantity in the database using the new function
                             filas_afectadas = self.db.modifica_cantidad(
-                                producto[2],  # Código del producto (producto[2] es el código)
-                                current_cantidad - nueva_cantidad  # Nueva cantidad
+                                producto[2],  # Product code (product[2] is the code)
+                                current_cantidad - nueva_cantidad  # New quantity
                             )
                         
                             if filas_afectadas > 0:
-                            # Registrar el retiro en la tabla Modificaciones
+                            # Record the withdrawal in the Modifications table
                                 self.db.registrar_retiro(producto[2], nueva_cantidad)
                             
-                            # Mostrar mensaje de éxito si se actualizó correctamente
+                            # Show success message if updated successfully
                                 mssg.showinfo("Éxito", "Productos retirados correctamente.")
                             
-                            # Refrescar la lista de productos en la interfaz gráfica
-                                self.get_productos()  # Esto actualiza la GUI con los datos más recientes
+                            # Refresh the list of products in the graphical interface
+                                self.get_productos()  # This updates the GUI with the latest data.
                             
-                            # Limpiar los campos de entrada
+                            # Clear input fields
                                 self.clear_fields()
-                                break  # Salir del bucle después de actualizar un producto
+                                break  # Exiting the loop after updating a product
                             else:
                                 mssg.showerror("Error", "No se pudo actualizar el producto en la base de datos.")
                                 break
                         else:
-                            mssg.showerror("Error", f"No hay suficiente cantidad de {producto[3]} en inventario.")  # producto[3] es el nombre del producto
-                            break  # Salir del bucle si no hay suficiente cantidad
+                            mssg.showerror("Error", f"No hay suficiente cantidad de {producto[3]} en inventario.")  # product[3] is the product name
+                            break  # Exit the loop if there is insufficient quantity
                     except ValueError:
                         mssg.showerror("Error", "La cantidad debe ser un número entero.")
-                        break  # Salir del bucle si la cantidad no es válida
+                        break  # Exit loop if quantity is invalid
             else:
-            # No hay productos asociados al ID NIT
+            # There are no products associated with the NIT ID
                 mssg.showerror("Error", "No se encontraron productos asociados al ID NIT.")
         else:
-        # No se ingresó ID NIT o la cantidad no es válida
+        # No NIT ID entered or the amount is not valid
             mssg.showerror("Error", "Por favor, ingrese el ID NIT y la cantidad a retirar.")
 
     def delete_producto(self):
-    # Obtener el código del producto desde el campo de entrada
+    # Get product code from input field
         codigo = self.codigo.get()
 
-        if codigo:  # Verificar que se haya ingresado un código
+        if codigo:  # Verify that a code has been entered
             confirmar = mssg.askyesno("Confirmación", f"¿Estás seguro de que deseas eliminar el producto con código {codigo}?")
         
             if confirmar:
                 try:
-                # Llamar a la función de la base de datos para eliminar el producto
+                # Call database function to delete the product
                     self.db.delete_producto(codigo)
                 
-                # Refrescar el Treeview después de eliminar el producto
-                    self.get_productos()  # Esto actualiza el Treeview con los productos restantes
+                # Refresh Treeview after product removal
+                    self.get_productos()  # This updates the Treeview with the remaining products.
                 
-                # Limpiar los campos de entrada
+                # Clear input fields
                     self.clear_fields()
 
-                # Mostrar un mensaje de éxito
+                # Display a success message
                     mssg.showinfo("Éxito", f"Producto con código {codigo} eliminado correctamente.")
 
                 except Exception as e:
@@ -1043,20 +1043,20 @@ class MainWindow:
             mssg.showerror("Error", "Debes ingresar el código del producto a eliminar.")
 
     def on_double_click(self, event):
-    # Verifica si el widget treeview existe
+    # Check if the treeview widget exists
         if not self.tree.exists(self.tree.selection()):
             mssg.showerror("Error", "No se puede seleccionar el elemento. El Treeview ya no está disponible.")
             return
 
         try:
-        # Obtener el ítem seleccionado desde el treeview
+        # Get the selected item from the treeview
             selected_item = self.tree.selection()[0]
             values = self.tree.item(selected_item, 'values')
 
-        # Limpiar los campos de entrada
+        # Clear input fields
             self.clear_fields()
 
-        # Poner los valores seleccionados en los campos
+        # Put the selected values in the fields
             self.id_nit.insert(0, values[0])
             self.nombre_proveedor.insert(0, values[1])
             self.codigo.insert(0, values[2])
@@ -1067,10 +1067,6 @@ class MainWindow:
             self.fecha_vencimiento.insert(0, values[7])
             self.fecha_registro.insert(0, values[8])
 
-        # Buscar y mostrar detalles del proveedor asociado
-            proveedor = self.db.search_proveedor(values[0]).fetchone()
-            if proveedor:
-                self.nombre_proveedor.insert(0, proveedor[1])
 
         except IndexError:
             mssg.showerror("Error", "Error al seleccionar el producto.")
@@ -1106,6 +1102,7 @@ class MainWindow:
             self.validate_precio(None) and
             self.validate_fecha_vencimiento(None)
         )
+   
 ```
 
 ### MainIndusStock
