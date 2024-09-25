@@ -2,6 +2,8 @@
 
 **"An undertaking of both obstacles and achievements, bringing forth essential lessons"**
 
+![Logo](loguito.png)
+
 # Planning
 ### 1. How was the problem addressed?
 
