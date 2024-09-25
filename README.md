@@ -1132,9 +1132,9 @@ To make use of the inventory management application follow the steps below:
    
 3. Unzip the zip file
    
-4a. Open the file with location: InduStock-src-MainIndusStock.py and run the file
+4. (A) Open the file with location: InduStock-src-MainIndusStock.py and run the file
+   
+   (B) Or if you prefer to open the whole folder in visual studio and run only the file: InduStock-src-MainIndusStock.py
 
-4b. Or if you prefer to open the whole folder in visual studio and run only the file: InduStock-src-MainIndusStock.py
-
-5. If you want to see the database after running the file, open: management-inventory.db
+6. If you want to see the database after running the file, open: management-inventory.db
 
