@@ -1128,6 +1128,8 @@ if __name__ == "__main__":
 
 To make use of the inventory management application follow the steps below:
 
+*Option without virtual environment:*
+
 1. Install the SQLite Viewer extension in Visual Studio.
    
 2. Download the attached zip file to the repo on your computer.
@@ -1139,4 +1141,6 @@ To make use of the inventory management application follow the steps below:
    (B) Or if you prefer to open the whole folder in visual studio and run only the file: InduStock-src-MainIndusStock.py
 
 6. If you want to see the database after running the file, open: management-inventory.db
+
+*Option with virtual environment:*
 
