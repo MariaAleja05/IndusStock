@@ -568,7 +568,7 @@ The last module: MainWindow, contains the following code, and is responsible for
 In summary, the MainWindow module encapsulates the GUI logic for the inventory management application. It integrates various functionalities to search, add, update, and delete product records, while also ensuring a smooth user experience through validations and feedback mechanisms. By managing user interactions with the database, this module plays a crucial role in maintaining an accurate and user-friendly inventory management system.
 
 ```python
-# MainWindow
+# MainWindow.py
 
 import tkinter as tk                            # Used to create GUI
 from tkinter import Toplevel                    # 
